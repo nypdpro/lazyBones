@@ -26,11 +26,12 @@ class ViewController: UIViewController {
         squareView.layer.insertSublayer(gradientLayer, at: 0)
         
         squareView.layer.cornerRadius = 15
-        squareView.layer.masksToBounds = true
+        squareView.layer.masksToBounds = false
         
+
         squareView.layer.shadowColor = UIColor.darkGray.cgColor
-        squareView.layer.shadowOpacity = 0.2
-        squareView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        squareView.layer.shadowOpacity = 0.8
+        squareView.layer.shadowOffset = CGSize(width: 0, height: 10)
         squareView.layer.shadowRadius = 5
     }
     

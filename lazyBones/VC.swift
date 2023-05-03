@@ -9,46 +9,74 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let squareView = UIView()
+
     let gradientLayer = CAGradientLayer()
+    
+    let mainView = UIView()
+    let subView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        styleAndLayout()
+       
         viewStyle()
+        styleAndLayout()
+        
     }
     
-    private func viewStyle() {
-        
-        view.backgroundColor = .systemGray
-        gradientLayer.colors = [UIColor.systemOrange.cgColor, UIColor.blue.cgColor]
-        squareView.layer.insertSublayer(gradientLayer, at: 0)
-        
-        squareView.layer.cornerRadius = 15
-        squareView.layer.masksToBounds = false
-        
 
-        squareView.layer.shadowColor = UIColor.darkGray.cgColor
-        squareView.layer.shadowOpacity = 0.8
-        squareView.layer.shadowOffset = CGSize(width: 0, height: 10)
-        squareView.layer.shadowRadius = 5
+    private func viewStyle() {
+        view.backgroundColor = .systemGray
+        
+        
+        mainView.backgroundColor = .clear
+        mainView.layer.cornerRadius = 15
+        mainView.layer.shadowColor = UIColor.darkGray.cgColor
+        mainView.layer.shadowOpacity = 0.8
+        mainView.layer.shadowOffset = CGSize(width: 0, height: 10)
+        mainView.layer.shadowRadius = 5
+       
+
+        subView.backgroundColor = .white
+        subView.layer.cornerRadius = 15
+        subView.layer.masksToBounds = true
+       
+        
+        gradientLayer.colors = [UIColor.systemOrange.cgColor, UIColor.blue.cgColor]
+        gradientLayer.frame = subView.bounds
+        subView.layer.insertSublayer(gradientLayer, at: 0)
     }
+
+    
+    
+    
     
     private func styleAndLayout() {
-        squareView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(squareView)
+        
+        view.addSubview(mainView)
+        mainView.addSubview(subView)
+        
+        mainView.translatesAutoresizingMaskIntoConstraints = false
+        subView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            squareView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            squareView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
-            squareView.widthAnchor.constraint(equalToConstant: 100),
-            squareView.heightAnchor.constraint(equalTo: squareView.widthAnchor)
+            mainView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            mainView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
+            mainView.widthAnchor.constraint(equalToConstant: 100),
+            mainView.heightAnchor.constraint(equalTo: mainView.widthAnchor),
+            
+            
+            subView.topAnchor.constraint(equalTo: mainView.topAnchor),
+            subView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
+            subView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
+            subView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor)
+            
         ])
+        
     }
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        gradientLayer.frame = squareView.bounds
+        gradientLayer.frame = mainView.bounds
     }
 }
